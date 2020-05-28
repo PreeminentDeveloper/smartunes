@@ -1,4 +1,4 @@
-# deezer
+# smartunes
 
 A new Flutter project.
 
