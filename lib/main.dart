@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         color: Colors.pinkAccent,
-        title: "Deezer",
+        title: "SmarTunes",
         home: Wrapper(),
         theme: ThemeData(
           fontFamily: 'Abel',

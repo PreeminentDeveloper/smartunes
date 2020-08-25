@@ -8,6 +8,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 
 class ManageAccount extends StatefulWidget {
+
+  final String email, username;
+  ManageAccount({this.email, this.username});
   @override
   _ManageAccountState createState() => _ManageAccountState();
 }
@@ -73,7 +76,7 @@ class _ManageAccountState extends State<ManageAccount> {
                   children: <Widget>[
                     CircleAvatar(
                       backgroundImage: _image == null
-                          ? AssetImage("lib/images/seg2.jpg")
+                          ? AssetImage("lib/images/avatar.jpg")
                           : FileImage(_image, scale: 1.0),
                       maxRadius: 60.0,
                     ),
@@ -88,12 +91,13 @@ class _ManageAccountState extends State<ManageAccount> {
                         children: <Widget>[
                           Text(
                             "Oluwasegun Badaru",
+                            // "${widget.username}",
                             style: TextStyle(
                                 fontSize: 20.0, fontWeight: FontWeight.bold), textAlign: TextAlign.center,
                           ),
                           SizedBox(height: 5.0),
                           Text(
-                            "Preeminent Developer",
+                            "${widget.email}",
                             style: TextStyle(fontSize: 14.0) , textAlign: TextAlign.center,
                           ),
                           SizedBox(height: 5.0),

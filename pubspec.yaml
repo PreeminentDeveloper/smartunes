@@ -31,6 +31,7 @@ dependencies:
   image_picker: ^0.6.4
   http:
   audioplayers: ^0.15.1
+  url_launcher: ^5.5.0
   # flutter_facebook_login:
   
   # uses-material-design: true

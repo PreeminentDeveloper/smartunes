@@ -1,4 +1,5 @@
 import 'package:deezer/Screens/Home/home.dart';
+import 'package:deezer/Screens/Models/user.dart';
 import 'package:deezer/Services/auth.dart';
 import 'package:deezer/Shared/loading.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,8 @@ class _LoginState extends State<Login> {
   bool loading = false;
 
   bool _obscureText = true;
+  
+  User user = User();
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +124,10 @@ class _LoginState extends State<Login> {
                   height: 10.0,
                 ),
                 TextFormField(
-                  validator: (val) => val.isEmpty ? "Enter an email" : null,
+                  validator: (val) {
+                    if(val.isEmpty)
+                     return "Enter an email";
+                  },
                   onChanged: (val) {
                     setState(() => email = val);
                   },
@@ -185,9 +191,14 @@ class _LoginState extends State<Login> {
                           loading = false;
                         });
                       }else{
-                        Navigator.of(context).pop();
-                        print("Login Successful.");
-                        print(result.uid);
+                        setState(() {
+                          // user.email = email;
+                          // print(user.email);
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home(email: user.email)));
+                          loading = false;
+                          print("Login Successful.");
+                          print(result.uid);
+                        });
                       }
                     }
                   },

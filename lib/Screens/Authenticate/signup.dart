@@ -1,4 +1,6 @@
 import 'package:deezer/Screens/Authenticate/login.dart';
+import 'package:deezer/Screens/Home/home.dart';
+import 'package:deezer/Screens/Models/user.dart';
 import 'package:deezer/Services/auth.dart';
 import 'package:deezer/Shared/loading.dart';
 import 'package:flutter/material.dart';
@@ -12,9 +14,6 @@ class _SignUpState extends State<SignUp> {
 
   final AuthService _auth = AuthService();
 
-  var _gender = ['Gender', 'Male', 'Female'];
-
-  var _currentSelectedGender = 'Gender';
   final _formKey = GlobalKey<FormState>();
   String email = "";
   String password = "";
@@ -24,6 +23,8 @@ class _SignUpState extends State<SignUp> {
   bool loading = false;
   bool _isHidden = true;
   bool _obscureText = true;
+
+  User user;
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +125,10 @@ class _SignUpState extends State<SignUp> {
                 height: 10.0,
               ),
               TextFormField(
-                  validator: (val) => val.isEmpty ? "Enter an email" : null,
+                  validator: (val) {
+                    if(val.isEmpty)
+                     return "Enter an email";
+                  },
                   cursorColor: Colors.black45,
                   style: TextStyle(fontSize: 18.0),
                   decoration: InputDecoration(
@@ -168,7 +172,10 @@ class _SignUpState extends State<SignUp> {
                 ),
               SizedBox(height: 10.0),
               TextFormField(
-                  // validator: (val) => val.isEmpty ? "Enter username" : null,
+                  validator: (val) {
+                    if(val.isEmpty)
+                     return "Enter username";
+                  },
                   cursorColor: Colors.black45,
                   style: TextStyle(fontSize: 18.0),
                   decoration: InputDecoration(
@@ -181,42 +188,6 @@ class _SignUpState extends State<SignUp> {
                   },
                 ),
               SizedBox(height: 10.0),
-              // Row(
-              //   children: <Widget>[
-              //     Expanded(
-              //         child: TextFormField(
-              //           // validator: (val) => val.isEmpty ? "Enter Age" : null,
-              //       cursorColor: Colors.black45,
-              //       keyboardType: TextInputType.numberWithOptions(),
-              //       decoration: InputDecoration(
-              //           border: InputBorder.none,
-              //           labelText: "Age",
-              //           labelStyle:
-              //               TextStyle(color: Colors.black45, fontSize: 18.0)),
-              //     )),
-              //     Divider(
-              //       height: 16.0,
-              //       color: Colors.pinkAccent,
-              //     ),
-              //     Expanded(
-              //         child: DropdownButton<String>(
-              //       elevation: 8,
-              //       isExpanded: true,
-              //       items: _gender.map((String userGender) {
-              //         return DropdownMenuItem<String>(
-              //           value: userGender,
-              //           child: Text(userGender),
-              //         );
-              //       }).toList(),
-              //       onChanged: (String newGenderSelected) {
-              //         setState(() {
-              //           this._currentSelectedGender = newGenderSelected;
-              //         });
-              //       },
-              //       value: _currentSelectedGender,
-              //     ))
-              //   ],
-              // ),
               SizedBox(
                 height: 40.0,
               ),
@@ -244,8 +215,11 @@ class _SignUpState extends State<SignUp> {
                       });
                     }else{
                       setState(() {
-                        Navigator.of(context).pop();
-                        message = "Invalid Email/Password";
+                        // user.email = email;
+                        // user.username = username;
+                        // print(user.email);
+                        // print(user.username);
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home(email: email, username: username)));
                       });
                     }
                   }
